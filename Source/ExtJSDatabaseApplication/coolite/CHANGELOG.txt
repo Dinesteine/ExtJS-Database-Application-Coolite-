@@ -1,0 +1,1103 @@
+﻿--------------------------------------------------------------------------
+                            CHANGE LOG
+--------------------------------------------------------------------------
+
+**************************************************************************
+2009-06-28 [Version 0.8.1]
+**************************************************************************
+<ext:ScriptManager>
+
+1.  Add RemoveViewState [boolean] property. Allows for the complete 
+	removal of the __VIEWSTATE field from the Page response.
+	
+	If true, the VIEWSTATE is not sent to, nor returned from the client.
+	
+	Can provide a significant initial page download size savings if true.
+	With the Coolite Toolkit Controls, for many scenarios the ViewState is 
+	not required and can be eliminated from the response.
+	
+	Example
+	
+	<ext:ScriptManager runat="server" RemoveViewState="true" /> 
+
+--------------------------------------------------------------------------
+<ext:Menu>
+
+FIX
+
+1.  Fixed Visual Stuido Design time bug where draging an <ext:Menu> from
+	the Toolbox would throw an Exception.
+	
+	Example
+		
+		---------------------------
+		Microsoft Visual Studio
+		---------------------------
+		The operation could not be completed 
+		---------------------------
+		OK   
+		---------------------------
+
+--------------------------------------------------------------------------
+<ext:Button>, <ext:ToobarButton>
+
+FEATURE
+
+1.  New .MenuArrow property. If false, the small down arrow on the Button
+    will not render if a Menu has been added to the Button.
+     
+    Example
+     
+	<ext:Button runat="server" Text="Button" MenuArrow="false">
+		<Menu>
+			<ext:Menu runat="server">
+				<Items>
+					<ext:MenuItem runat="server" Text="Item1" />
+				</Items>
+			</ext:Menu>
+		</Menu>
+	</ext:Button>
+
+2.  New .ShowMenuArrow(), .HideMenuArrow() and .ToggleMenuArrow() 
+	server-side Methods.
+	
+	Example
+	
+	this.Button1.ShowMenuArrow(); // shows arrow if hidden
+	this.Button1.HideMenuArrow(); // hides arrow if show
+	this.Button1.ToggleMenuArrow(); // if hidden, shows arrow, otherwise hide
+	
+3.  New .showMenuArrow(), .hideMenuArrow() and .toggleMenuArrow() 
+	client-side JavaScript functions.
+	
+	Example
+	
+	Button1.showMenuArrow(); // shows arrow if hidden
+	Button1.hideMenuArrow(); // hides arrow if show
+	Button1.toggleMenuArrow(); // if hidden, shows arrow, otherwise hide	
+
+
+--------------------------------------------------------------------------
+<ext:DatePicker>
+
+FIX
+
+1.  Added fix to avoid JavaScript error when the DatePicker is used on a 
+	page that also includes the Microsoft AjaxControlToolkit.
+
+
+--------------------------------------------------------------------------
+Component.cs (inherited by all controls)
+
+FEATURE
+
+1.  Added ability to update the FieldLabel proeprty during an AjaxEvent or
+	AjaxMethod request. 
+
+
+
+**************************************************************************
+2009-05-26 [Version 0.8.0]
+**************************************************************************
+
+1.  Added <ext:Spotlight> control
+
+2.  Added <ext:ObjectHolder> control
+
+3.  HtmlEditor: added EscapeValue property (escaping editor value which 
+	allows to avoid dangerous content request exception. Please note that 
+	HtmEditor must be switched to Design mode before request for escape 
+	performing)
+
+4.  Added AjaxMethodProxyIDMode attribute (description 
+	http://www.coolite.com/forums/Topic6281-16-1.aspx#bm6319)
+
+5.  AjaxMethods internal cache is ignored under debug (degrades 
+	performance slightly due to reflection overhead during debug but it 
+	allows to change/add ajax methods on fly)
+
+6.  GridView: Added HeaderRows collection. It allows to add aditional 
+	header rows with controls
+
+7.  GridView: Added StandardHeaderRow which allows to hide standard header
+	row when you defined own header rows in HeaderRows
+
+8.  ToolbarSpacer: Added ability to set width
+
+9.  GridPanel: added CommandColumn, ImageCommandColumn, Commands property 
+	for standard column
+
+10. Store: added AddField/RemoveField functions (using during AjaxEvent)
+
+11. TabPanel: added BeforeTabClose, BeforeTabHide and Close AjaxEvents or
+	Listeners
+
+12. Tab: added Close event support
+
+13. TableLayout: added CellCls property
+
+14. Icon.None option added to the Icon enum
+
+15. TableGrid: added Columns and Fields properties
+
+16. Locale supports, automatically attach locale js file depending current 
+	UI culture or manually setted in Locale property of script manager
+
+17. New CacheFly and CacheFlyAndFile values in ResourceLocationType enum 
+	(RenderScripts and RenderStyles properties of ScriptManager)
+
+18. DatePicker: added DisabledDates property
+
+19. MultiSelect: added BeforeDrop and AfterDrop listeners/ajax events 
+
+20. Added <ext:TimeField> control
+
+21. Label: added Icon, IconCls and IconAlign properties
+
+22. Added <ext:HyperLink> control
+
+23. Added <ext:Image> control
+
+24. Added <ext:LinkButton> control
+
+25. Added <ext:ImageButton> control
+
+26. Desktop: added shortcut click listener and ajax event
+
+27. IDMode: new value Ignore and Explicit
+
+28. InitScriptMode: Inline and Linked
+
+29. RowExpander: added Prepare property for dynamic template contetnt 
+	setting (http://www.coolite.com/forums/Topic8863-16-1.aspx)
+
+30. Added <ext:FormPanel> control
+
+31. CycleButton: added ToggleOnClick property which allows to disable 
+	active item toggle after button click
+
+32. Panel AutoLoad: added TriggerEvent, ReloadOnEvent properties
+
+33. Store: added ShowWarningOnFailure property
+
+34. Added <ext:History> Control.
+
+35. Added <ext:StyleContainer> which allows for custom placement of 
+	stylesheet files within the <head>
+
+36. Desktop: Launcher is no more required for DesktopModule
+
+37. AjaxEvent confirmation 
+	(http://www.coolite.com/forums/Topic10348-16-1.aspx)
+
+38. ComboBox: Items and Store items can be merged
+
+39. AutoLoad config (LoadConfig): new property  PassParentSize. If true 
+	then container size will be passed in query string (width and height 
+	params)
+
+40. KeepActive plugin for Accordion
+
+41. ComboBox: ability to add custom trigger butons (like TriggerField)
+
+42. <ext:TabFX> plugin for <ext:TabPanel>
+
+43. New property for all Coolite controls - AutoDataBind. If true then 
+	control calls DataBind itself (usefull if controls contains <%# %>)
+
+44. Client side GridPanel functions (save, submitData, getRowsValues) can 
+	get new options: visibleOnly and dirtyOnly
+	
+    grid.save({visibleOnly:true, dirtyOnly:true});
+    getRowsValues function(selectedOnly, visibleOnly, dirtyOnly)
+    submitData function(selectedOnly, visibleOnly, dirtyOnly)
+    
+45. #{AjaxMethods} - means current context. Now ajax methods of current 
+	context (user control, page or master page) can be called as
+	
+    #{AjaxMethods}.myFunc();
+    
+46. Ext.MessageBox class
+
+47. FileUploadField control
+
+48. Ext.WindowMgr class
+
+49. Ext.Notification class
+
+50. GridFilters: added properties to set predefined filters values 
+	(http://www.coolite.com/forums/FindPost11505.aspx)
+
+51. <ext:ValidationStatus> plugin for Panel controls.
+
+52. Label: Format property. The format of the string to render using the 
+	.Text property. Example 'Hello {0}'.
+
+53. Field: HideWithLabel property. If true then hide with label in 
+	FormLayout
+
+54. AjaxEvent Paramter: adding Params property. Any AjaxEvent parameter 
+	supports sub parameters
+
+55. GridPanel: ClearEditorFilter -  True to clear editor filter before 
+	start editing (useful for ComboBox editor)
+
+56. TabPanel: TabAlign property (Left, Right)
+
+57. ComboBox: InsertRecord, AddRecord, InsertItem, AddItem, RemoveByField,
+	RemoveByIndex, RemoveByValue, RemoveByText server side methods 
+	(used during AjaxEvent only)
+
+58. Panel: ClearContent method -  Clears loaded content. Use 
+	.clearContent() function on client-side
+
+59. GridPanel: AddRecord, InsertRecord, DeleteSelected server side methods
+	(used during AjaxEvent only)
+
+60. Store: AddRecord, InsertRecord, AddSortedRecord, ClearFilter, 
+	CommitChanges, Filter, FilterBy, RejectChanges, RemoveAll, 
+	SetDefaultSort, Sort server side methods (using during AjaxEvent only)
+
+61. ScriptManager: AjaxMethodNamespace, AjaxMethod: Namespace. Set a 
+	custom namespace instead of default "Coolite.AjaxMethods"
+
+62. <ext:Editor> control
+
+63. <Editor> property for <ext:Label>
+
+64. <ext:GridPanelMaintainScrollPositionOnRefresh> plugin for 
+	<ext:GridPanel>
+
+65. Label: .EmptyText property. A string to display when the .Text 
+	property is empty. 
+
+66. Field's properties: Note, NoteCls, NoteAlign
+
+67. MultiField control
+
+68. Toolbar's property: Flat
+
+69. Menu's property: Width
+
+70. Button's property: Flat
+
+71. RecordField's property: IsComplex (complex serialization for 
+	particular field)
+
+72. HttpProxy's property: Json (for submit parameters as json object, 
+	using with script web-services)
+
+
+New examples:
+	Coolite.Examples\Examples\Miscellaneous\XTemplate\Overview\
+	Coolite.Examples\Examples\Miscellaneous\Spotlight\Ajax_Overview\
+	Coolite.Examples\Examples\Miscellaneous\Spotlight\Overview\
+	Coolite.Examples\Examples\GridPanel\MultiHeader\Overview\
+	Coolite.Examples\Examples\GridPanel\MultiHeader\Filter\
+	Coolite.Examples\Examples\GridPanel\Commands\Row_Command\
+	Coolite.Examples\Examples\GridPanel\Commands\Cell_Command\
+	Coolite.Examples\Examples\GridPanel\Commands\Group_Command\
+	Coolite.Examples\Examples\GridPanel\Commands\Image_Command\
+	Coolite.Examples\Examples\GridPanel\Commands\Menu_Row_Command\
+	Coolite.Examples\Examples\GridPanel\Commands\Prepare_Toolbar\
+	Coolite.Examples\Examples\GridPanel\Miscellaneous\Submit_Two_Grids\
+	Coolite.Examples\Examples\Layout\CardLayout\Basic\
+	Coolite.Examples\Examples\Miscellaneous\Locale\Basic\
+	Coolite.Examples\Examples\Miscellaneous\Locale\Predefined_Language\
+	Coolite.Examples\Examples\Miscellaneous\Locale\User_Language\
+	Coolite.Examples\Examples\Form\Miscellaneous\Form_View\
+	Coolite.Examples\Examples\Form\Miscellaneous\Edit_Form_View\
+	Coolite.Examples\Examples\GridPanel\Data_Representation\Data_Prepare\
+	Coolite.Examples\Examples\GridPanel\Data_Representation\Editor_Field_Mapping\
+	Coolite.Examples\Examples\GridPanel\Data_Representation\Field_Converter\
+	Coolite.Examples\Examples\GridPanel\Data_Representation\Field_Mapping\
+	Coolite.Examples\Examples\Buttons\ImageButton\Overview\
+	Coolite.Examples\Examples\Buttons\LinkButton\Overview\
+	Coolite.Examples\Examples\Form\Label\Basic\
+	Coolite.Examples\Examples\Form\HyperLink\Basic\
+	Coolite.Examples\Examples\Miscellaneous\ProgressBar\Client_side_update\
+	Coolite.Examples\Examples\Miscellaneous\ProgressBar\Server_side_update\
+	Coolite.Examples\Examples\Form\TimeField\Overview\
+	Coolite.Examples\Examples\Layout\AbsoluteLayout\Basic\
+	Coolite.Examples\Examples\Layout\AbsoluteLayout\Absolute_Layout_Form\
+	Coolite.Examples\Examples\Layout\AnchorLayout\Basic\
+	Coolite.Examples\Examples\Layout\AnchorLayout\Anchor_With_Form\
+	Coolite.Examples\Examples\Layout\ColumnLayout\Basic\
+	Coolite.Examples\Examples\Panel\Basic\Deferred_Loading\
+	Coolite.Examples\Examples\Miscellaneous\History\Basic\
+	Coolite.Examples\Examples\Form\TriggerField\Custom_Icon\
+	Coolite.Examples\Examples\Form\FormPanel\Basic\
+	Coolite.Examples\Examples\Form\FormPanel\Validation\
+	Coolite.Examples\Examples\Toolbar\StatusBar\Advanced\
+	Coolite.Examples\Examples\ColorPalete\Basic\Custom_Colors\
+	Coolite.Examples\Examples\ColorPalete\Basic\Custom_View\
+	Coolite.Examples\Examples\ColorPalete\Basic\Overview\
+	Coolite.Examples\Examples\MessageBox\Basic\Overview\
+	Coolite.Examples\Examples\Notification\Basic\Overview\
+	Coolite.Examples\Examples\Form\FileUploadField\Basic\
+	Coolite.Examples\Examples\TreePanel\Basic\Refresh_static_tree\
+	Coolite.Examples\Examples\Form\ComboBox\Items_Actions\
+	Coolite.Examples\Examples\Editor\Basic\Overview\
+	Coolite.Examples\Examples\Events\AjaxMethods\ID_Mode\
+	Coolite.Examples\Examples\MessageBox\Basic\ButtonsConfig\
+	Coolite.Examples\Examples\Form\Field_Note\Overview\
+	Coolite.Examples\Examples\Form\MultiField\Overview\
+	Coolite.Examples\Examples\Toolbar\Menu\Flat_Toolbar\
+	Coolite.Examples\Examples\Events\AjaxMethods\Exceptions\
+	Coolite.Examples\Examples\Events\AjaxMethods\UserControls\
+	Coolite.Examples\Examples\Form\MultiSelect\Submit_Data\
+	Coolite.Examples\Examples\Panel\Basic\AutoLoad_MergeMode\
+
+**************************************************************************
+2008-10-02 [RELEASE 0.6.0]
+**************************************************************************
+
+**************************************************************************
+2008-07-22 [Revision #99, Version 0.6.0]
+**************************************************************************
+
+1.  Fixed bug where .ActiveTabIndex was not persisting properly on PostBack.
+	See http://coolite.com/forums/Topic884-16-1.aspx for discussion.
+	
+2.  Added functionality to Button.OnClientClick so when adding Control ID 
+	tokens, the tokens would be properly parsed into .ClientID's.
+	
+	Example (Old)
+	
+	<ext:Button 
+		runat="server" 
+		Text="Cancel"
+        AutoPostBack="false"
+        OnClientClick="Window1.restore();"
+        />
+	
+	Example (New)
+	
+	<ext:Button 
+		runat="server" 
+		Text="Cancel"
+        AutoPostBack="false"
+        OnClientClick="{Window1}.restore();"
+        />
+        
+3.  Fixed bug with Listener where ViewState was not persisting properly.
+
+4.  Found another scenario where setting the .Text property of a TextField
+	to an empty string ("") was causing problems. See Revision #100 (#3).
+	
+	The .EmptyText was not rendering properly because the validation must
+	be fired although the previous fix of setting the .SetRawValue() 
+	Method would not fire the validation and the .EmptyText would not be
+	displayed.
+	
+	The fix required using the .SetValue() Method, then call the 
+	this.ClearInvalid() Method. If the .Text is empty, the validation is 
+	fired for the field, then cleared. Validation will be fired again on
+	blur of field. The same or similar fix was also applied to TextArea, 
+	NumberField and DateField.
+	
+5.  Fixed bug in DateField where if user cleared input field value then 
+	postback results to server, the new cleared value was not maintained. 
+	The previous value was persisted.
+
+6.  Added WindowScroll Listener to ScriptManager. The WindowScroll 
+	Listener will fire when the main browswer window is scrolled. 
+	
+	Example
+	
+	<ext:ScriptManager ID="ScriptManager1" runat="server">
+		<Listeners>
+			<WindowScroll Handler="console.log('scrolled');" />
+		</Listeners>
+	</{0}:ScriptManager>
+
+
+**************************************************************************
+2008-07-07 [Revision #101, Version 0.6.0]
+**************************************************************************
+
+1.  Fixed bug in DateField where the input field would not clear properly
+	if the SelectedDate was set to DateTime.MinValue or if the .Clear()
+	Method was called. 
+	
+	Fix involved using the .SetRawValue() Method only if the SelectedDate
+	was Null/Empty (.IsNull).
+	
+2.  Added support for Panel.Tools property.
+
+	The following demonstrates how to add a user defined "Toggle" Tool to 
+	Collapse/Expand the Panel. This would reproduce the same functionality
+	as setting the .Collapsible property to "true".
+
+	Example
+	
+	<Tools>
+		<ext:Tool Type="Toggle" Handler="panel.toggleCollapse();" />
+	</Tools>
+
+	The following example demonstrates adding a "Help" Tool. When the Help
+	Tool is clicked, the Handler property is executed and the content of a
+	<ext:Window> control is updated then the Window is shown. 
+	
+	Example
+	
+	<Tools>
+	   <ext:Tool 
+		    Type="Help" 
+			Qtip="Click for Help" 
+			Handler="
+				{Window1}.body
+					.update(String.format(msgTemplate, panel.title));
+				{Window1}.show();" 
+		    />
+	</Tools>
+	
+	In the above code sample, within the Handler property, a control token
+	({Window1}) is used. The server-side ID of the Window is wrapped with
+	curly-braces {}. The ID is then converted to the .ClientID at runtime.
+	The .ClientID may be different than the .ID at runtime if the control
+	is nested within a INamingContainer control such as a MasterPage.
+
+
+**************************************************************************
+2008-07-07 [Revision #100, Version 0.5.4]
+**************************************************************************
+
+1.  Created new version 0.5.4 release.
+
+2.  Applied design-time bug fix from Revision #80 to build 0.5.4.
+	
+	Fixed bug in WebControl.cs where .ScriptManager property was causing 
+	a Design-time exception which crashed VS and VWD.
+	
+3.  Fixed bug in TextField where if .Text property was set to an empty
+	string (""), the input field would not clear. The same or similar fix 
+	was also applied to TextArea, NumberField and DateField.
+	
+
+**************************************************************************
+2008-07-04 [Revision #96, Version 0.6.0]
+**************************************************************************
+
+1.  Updated ext-all.css to use version 2.1. Previously was mistakenly
+	using v2.0.2.
+
+2.  Fixed bug in Store where if .Data property was set and AutoLoad="true"
+	a JavaScript error was thrown. Now if Data is not null, AutoLoad is 
+	set to "false".
+	
+3.  Added new GridPanel sample to demonstrate connecting directly to a
+	.xml file. See \Coolite.Sandbox\GridPanel\XmlReader\Direct.aspx
+	
+4.  Renamed JavaScriptExtDateTimeJsonConverter class to 
+	CtorDateTimeJsonConverter.
+	
+5.  Renamed RegexCheckJsonConverter to RegexJsonConverter.
+
+6.  Renamed JavaScriptDateTimeJsonConverter to CtorDateTimeJsonConverter. 
+	
+	Example
+	
+	// returns new Date(2008, 7, 4, 18, 55, 18)
+
+7.  Added ISODateTimeJsonConverter which formats Json DateTime 
+	objects without the millisecond format specifier.  
+	
+	Example
+	
+	// returns "2008-04-12T12:53:25Z"
+
+8.  Added JSONDateTimeJsonConverter which formats DateTime objects using the 
+	"yyyy-MM-dd'T'HH:mm:ss" pattern. The "server-time" is returned. The 
+	DateTime object is not converted to UTC. Please use 
+	ISODateTimeJsonConverter if UTC is required.
+	
+	No timezone information is added to the converted string. 
+	
+	This is now the default DateTimeConverter if using the 
+	Coolite.Ext.Web.JSON.Serialize Method.
+	
+	Example
+	
+	// returns "2008-04-12T12:53:25"
+	
+9.  Changed RecordField.DateFormat to use .NET format specifier syntax.	
+
+	See http://code.google.com/p/datejs/wiki/FormatSpecifiers for good 
+	comparison of difference between .NET/Java and PHP/Unix date and time
+	format specifier syntax.
+	
+10. Set RecordField.DateFormat to return "yyyy-MM-dd'T'HH:mm:ss" pattern
+	if .Type is "Date" and no DateFormat is set. The Data must be 
+	serialized using the Coolite.Ext.Web.JSON.Serialize Method. Otherwise
+	the DateFormat may need to be set. 
+	
+	Example (Old)
+	
+	<ext:RecordField Name="Availability" Type="Date" 
+		DateFormat="Y-m-dTh:i:s" />
+		
+	Example (New)
+	
+	<ext:RecordField Name="Availability" Type="Date" />
+	
+11. Added .Plugins property to Component. The Plugins property accepts an 
+	object or array of Plugin controls that will provide custom 
+	functionality for this component. The only requirement for a valid 
+	plugin is that it contain an init method that accepts a reference of type
+	Ext.Component. When a component is created, if any plugins are available, 
+	the component will call the init method on each plugin, passing a 
+	reference to itself. Each plugin can then call methods or respond to 
+	events on the component as needed to provide its functionality.	
+	
+	The following example demonstrates adding a Plugin to a Component
+	using markup syntax. 
+	
+	Example
+	
+	<Plugins>
+		<ux:TabCloseMenu ID="TabCloseMenu1" runat="server" />
+	</Plugins>
+	
+	The following example demonstrates adding a GenericPlugin to a 
+	Component using markup syntax. The GenericPlugin provides a 
+	convenient wrapper to ease adding a Plugin to a Component. 
+
+	Example
+	
+	<Plugins>
+		<ext:GenericPlugin 
+			runat="server" 
+			InstanceOf="Ext.ux.TabCloseMenu" 
+			Path="~/Plugins/TabCloseMenu.js" 
+			/>
+	</Plugins>
+	
+	The InstanceOf property is used by the Plugin to create a "new"
+	JavaScript instance of the Plugin.
+	
+	Example
+	
+	// If InstanceOf property is set with the following.
+	InstanceOf="Ext.ux.TabCloseMenu"
+	
+	// The constructor will be set as follows
+	new Ext.ux.TabCloseMenu()
+		
+	The Path property is used to set the src attribute of the <script>
+	element. The <script> element is rendered in sequence with the other
+	included <script> elements.
+	
+	Relative, Absolute, Virtual, Application root and remote paths are 
+	valid values.
+	
+	Example
+	
+	// Relative
+	"../Plugins/TabCloseMenu.js"
+	
+	// Absolute
+	"Plugins/TabCloseMenu.js"
+	
+	// Virtual
+	"/Plugins/TabCloseMenu.js"
+	
+	// Application Root
+	"~/Plugins/TabCloseMenu.js"
+	
+	// Remote
+	"http://www.example.com/Plugins/TabCloseMenu.js"
+	
+	The following example demonstrates adding a GenericPlugin from
+	code-behind.
+	
+	Example
+	
+	this.TabPanel1.Plugins.Add(
+		new GenericPlugin(
+			"Ext.ux.TabCloseMenu", 
+			"~/Plugins/TabCloseMenu.js"));
+			
+	To create a custom Plugin control, your class must inherit from the
+	Coolite.Ext.Web.Plugin class.
+	
+	The following demonstrates creating the TabCloseMenu Plugin.
+	
+	Example
+	
+	using System.ComponentModel;
+	using System.Web.UI;
+	using Coolite.Ext.Web;
+
+	namespace Coolite.Ext.UX
+	{
+		[InstanceOf(ClassName = "Ext.ux.TabCloseMenu")]
+		[ClientScript(typeof(TabCloseMenu), 
+			"Coolite.Ext.UX.TabCloseMenu.TabCloseMenu.js")]
+		[ToolboxData("<ext:TabCloseMenu runat=\"server\" />")]
+		[Description(
+			"Very simple plugin for adding a close context menu to tabs")]
+		public class TabCloseMenu : Plugin { }
+	}
+
+	The InstanceOfAttribute can be set instead of the InstanceOf property.
+	If both are set, the InstanceOf property will be used. If neither is 
+	set, an ArgumentException is thrown.
+	
+	The ClientScriptAttribute provides the Embedded Resource path to the 
+	required JavaScript file. Please ensure the file is marked as 
+	"Embedded Resource". To mark the file as an Embedded Resource, within 
+	Visual Studio, right-click on the file, select Properties, then set 
+	the "Build Action" to "Embedded Resource".
+	
+12. Added new PagingMemoryProxy. Now if <ext:PagingToolBar> is added to 
+	GridPanel, the GridPanel will automatically enable Paging of the
+	client-side data.
+	
+	See Coolite\Sandbox\GridPanel\MemoryProxy\PagingSortingMemoryData.aspx
+
+
+**************************************************************************
+2008-06-25 [Revision #80, Version 0.6.0]
+**************************************************************************
+
+1.  Fixed bug in WebControl.cs where .ScriptManager property was causing 
+	a Design-time exception which crashed VS and VWD.
+	
+2.  Added support for ArrayReader. Serializes an Object[].	
+
+3.  Fixed bug with GridPanel.LoadMask where LoadMask was not serializing
+	properly in the ClientConfig script.
+	
+4.  Added .AddBeforeClientInitScript(string script) and 
+	.AddAfterClientInitScript(string script) Methods to WebControl.cs. 
+	The two methods enable JavaScript/strings to be inserted immediately
+	before and after the ClientInitScript for instance of this control.
+	
+5.  Added two simple GridPanel samples which creat either an Object[]
+	array of Data or a Json object from a generic List<> of objects.
+	The Data is sent inline to the GridPanel and all sorting is performed
+	client-side. 
+	
+	Samples located in Coolite.Sandbox\GridPanel\ArrayGrid\
+	
+6.  Removed Coolite.Doodle Website project.
+
+7.  Added Coolite.Examples Web Application project	
+
+8.  Change Coolite.Sandbox Website project to a Web Application project.
+	
+
+**************************************************************************
+2008-06-25 [Revision #73, Version 0.6.0]
+**************************************************************************
+
+1.  Changed GridPanel Renderer property to use new Renderer type. 
+
+	The following example demonstrates setting a custom Handler to check 
+	if a boolean value is 'true', then return 'Yes' or 'No'. The Handler 
+	is automatically wrapped in a function(){} template and the Column
+	arguments are passed into the function. 
+
+	Example
+
+	<ext:Column Header="Indoor?" DataIndex="Indoor" Sortable="true">
+		<Renderer Handler="return (value) ? 'Yes':'No';" />
+	</{0}:Column>
+
+	// arguments
+	// "value", "metadata", "record", "rowIndex", "colIndex", "store"
+
+	The following example demonstrates setting a custom function. The 
+	function is rendered as a raw value and no formatting is applied.
+	
+	Example
+	
+	<ext:Column Header="Availability" DataIndex="Availability">
+		<Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
+	</{0}:Column>
+	
+	The following example demonstrates setting one of the Renderer 
+	helper Formats. The Renderer helper Format are a list of pre-defined 
+	list of functions which wrap common formatting functionality.
+		
+	Example
+	
+	<ext:Column Header="Price" DataIndex="Price" Sortable="true">
+		<Renderer Format="UsMoney" />
+	</{0}:Column>
+	
+	Other Format types include:
+	
+	None,
+	Capitalize,
+	Date,
+	DateRenderer,
+	DefaultValue,
+	Ellipsis,
+	FileSize,
+	HtmlDecode,
+	LowerCase,
+	StripScripts,
+	StripTags,
+	Substr,
+	Trim,
+	Undef,
+	Uppercase,
+	UsMoney
+	
+	The following example demonstrates setting the Ellipsis Format and 
+	passing an extra argument to trim the description at 50 characters. 
+	
+	Example
+	
+	<ext:Column Header="Description" DataIndex="description" Width="150">
+		<Renderer Format="Ellipsis" FormatArgs="50" />
+	</{0}:Column>
+
+
+**************************************************************************
+2008-06-25 [Revision #61, Version 0.6.0]
+**************************************************************************
+
+1.  Added "display:none;" to the Window Container <div> style. This avoids
+	a momentary 'flash' of <Body> on initial Page_Load. 
+	
+	The style was added using the ContainerStyleAttribute.
+	
+	Example
+	
+	[ContainerStyle("display:none;")]
+
+2.  Moved OnBeforeClientInit and OnAfterClientInit Events to Observable.cs
+	from Component.cs. Now requires an Observable type instead of 
+	Component type as parameter.
+
+3.  Integrated GridPanel and Store working into project.	
+
+
+**************************************************************************
+2008-06-24 [Revision #60, Version 0.6.0]
+**************************************************************************
+
+1.  Added 0.5.3 tag to SVN.
+
+2.  Changed Build# to 0.6.0.
+
+3.  Updated Copyright and date stamps. 
+
+4.  Added WindowUnload Listener to <ext:ScriptManager>.
+	
+	The following sample demonstrates setting the WindowUnload Listener
+	which checks to see if either "Tab1" or "Tab3" is active before
+	allowing the browser window to close or refresh. If "Tab2" is the 
+	activeTab, then the user will not be prompt to confirm.
+	
+	Example
+	
+	<ext:ScriptManager ID="ScriptManager1" runat="server">
+		<Listeners>
+			<WindowUnload Handler="
+				var id = {TabPanel1}.getActiveTab().id;
+				return (id == 'Tab1' || id == 'Tab3');
+			" />
+		</Listeners>
+	</{0}:ScriptManager>
+
+	<ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Height="300">
+		<Tabs>
+			<ext:Tab ID="Tab1" runat="server" Title="Tab 1" Html="Tab 1" />
+			<ext:Tab ID="Tab2" runat="server" Title="Tab 2" Html="Tab 2" />
+			<ext:Tab ID="Tab3" runat="server" Title="Tab 3" Html="Tab 3" />
+		</Tabs>
+	</{0}:TabPanel>
+	
+	Return 'true' to prompt the message, or 'false' to cancel the unload.
+	
+	The WindowUnload Listener is not native to Ext. We've added only as a 
+	convenience wrapper.
+
+5.  Added WindowUnloadMsg Property to ScriptManager. The WindowUnloadMsg
+	property is used as the extra text message to prompt to the user only 
+	when the <WindowUnload> Listener is set. 
+	
+	The following sample will prompt the user before they refresh or close 
+	the browser window. 
+	
+	Example
+	
+	<ext:ScriptManager 
+		ID="ScriptManager1" 
+		runat="server" 
+		WindowUnloadMsg="Your data will not be saved!">
+		<Listeners>
+			<WindowUnload Handler="return true;" />
+		</Listeners>
+	</{0}:ScriptManager>	
+
+
+**************************************************************************
+2008-06-23 [RELEASE 0.5.3]
+**************************************************************************
+
+
+**************************************************************************
+2008-06-23 [Revision #58, Version 0.5.3]
+**************************************************************************
+
+1.  Changed the call to the SweepControls Method from Page_Load to
+	Page_LoadComplete. This changed fixed a bug a where if controls were
+	added during Page_Load, they the SweepControls Method did not get 
+	called because the life-cycle had already passed. 
+	
+2.  Added support for adding Layout controls within a <asp:Content> area
+	of a MasterPage. 
+	
+	For example, in a MasterPage you define a <ext:ViewPort> within a 
+	<Center> region. In the Center region you add a <ext:Panel> and 
+	within that Panel you add your <asp:ContentPlaceHolder>. Now in the 
+	child page which uses this MasterPage, you can now add a 
+	<ext:FitLayout>.
+	
+	Example
+	
+	Define the following in your ViewPort MasterPage.
+
+	<ext:BorderLayout runat="server">
+		<Center>
+			<ext:Panel runat="server" Title="Center">
+				<Body>
+					<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server" />
+				</Body>
+			</{0}:Panel>
+		</Center>
+	</{0}:BorderLayout>
+
+	Then in the child you can add the following.
+
+	<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+		<ext:FitLayout ID="FitLayout1" runat="server">
+			<ext:Panel ID="Panel1" runat="server" Title="Inner Panel" />
+		</{0}:FitLayout>
+	</asp:Content>
+
+
+**************************************************************************
+2008-06-22 [Revision #57, Version 0.5.2]
+**************************************************************************
+
+1.  Added support to <ext:Button> so client-side validation is fired if
+	using asp: Validator controls. Previously only server-side validation
+	would fire.
+
+2.  Update copyright date stamp and revision# to version 0.5.3.
+
+3.  Added .Regions property to BorderLayout. Returns a List of regions.
+
+
+**************************************************************************
+2008-06-18 [Revision #44, Version 0.5.1]
+**************************************************************************
+
+1.  Updated copyright date stamp.
+
+2.  Moved intellisense.js to new Coolite/coolite/intellisense.js.
+
+3.  Fixed bug in WebControl.Render where the characters \t, \n and \r were 
+    being removed, but the regex to remove those chars was too greedy. Now 
+    no chars are removed. Makes html source less formatted and not as 
+    pretty. Will have to revisit with a better solution later.
+
+4.  Fixed bug in Listener.Hander where if the Hander string started with a 
+    token and included more that just a token (eg. {Panel}.getSize()), the 
+    regex to parse the tokens into their correct .ClientID was failing.
+
+5.  Fixed bug where ScriptManager.RenderScripts and 
+	ScriptManager.RenderStyles were not correctly creating the local path 
+	if set to "File". 
+
+
+**************************************************************************
+2008-06-15
+**************************************************************************
+
+1.  Added OnClientClick property to <ext:Button>. Functions same as 
+    <asp:Button> OnClientClick property. Fires "Click" Listener. 
+    
+2.  Updated Assembly and Copyright statements to Version 0.5.2.
+
+
+**************************************************************************
+2008-03-29
+**************************************************************************
+
+1.  Changed all "ClientEvents" properties to "Listeners"
+2.  Added FamFamFam icons as default Visual Studio Toolbox icons
+
+
+**************************************************************************
+2008-03-26
+**************************************************************************
+
+1.  Fixed bug where Button controls could not be used as a TriggerElement 
+    with Window.
+
+	Example
+	
+    <ext:Button ID="Button1" runat="server" Text="Submit" />
+    <ext:Window ID="Window1" runat="server" TriggerElement="Button2" />
+
+
+**************************************************************************
+2008-03-20
+**************************************************************************
+
+1.  Added extra options for setting the Global Config properties. Now the 
+    following Global Config properties can be set in the web.config, as 
+    Application variables, as Session variables or at the Page level by 
+    setting properties on the ScriptManager.
+    
+    a. CleanResourceUrl
+    b. GZip
+    c. RenderScripts
+    d. RenderStyles
+	e. ResourcePath
+	f. ScriptAdapter
+	g. ScriptMode
+	h. StateProvider
+	i. Theme
+	j. QuickTips
+	
+	The following forum post details each option. 
+	See http://www.coolite.com/forums/Topic112-4-1.aspx.
+	
+2.  Fixed bug with ILMerge script where the final combined Assembly was 
+	not being signed properly.
+    See http://www.coolite.com/forums/Topic166-7-1.aspx
+    
+3.  Fixed TabPanel rendering bug.
+
+4.  Fixed bug where the cool:ScriptContainer was not being found if added 
+	to a CustomUserControl, which was then added to the <head>. The 
+	ScriptManager will now recursively loop through all controls within 
+	the <head> to try and find the ScriptContainer. 
+
+5.  Added ResourcePath property which when used in conjunction with the 
+	RenderScripts="File" and RenderStyles="File" properties will instruct 
+	the controls on where to find the required resource files 
+	(.js, .css, images). The follwoing forum post contains more 
+	information and sample code. 
+	See http://www.coolite.com/forums/Topic116-7-1.aspx
+	
+
+**************************************************************************
+2008-03-04
+**************************************************************************
+
+1.  Added support for TabPanel control.
+
+2.  Added support for Button control with AutoPostBack support. Can be 
+	used a replacement for the standard asp:Button control.
+	
+3.  Added support for automatic GZip compression. By default the 
+	Assembly will now GZip compress all Embedded resource files 
+	(.js, .css, images).	The GZip compression removes approx 70% of the 
+	"over the wire" file size. The speed benefits are obvious. The 
+	Assembly will automatically detect if the user agent (browser) 
+	support GZip compression. The GZip compression can be turned off by 
+	setting the GZip property in the web.config, or 
+	Application["Coolite.GZip"] variable or the Session["Coolite.GZip"] 
+	variable. 
+
+4.  Added default functionality to rewrite url's when Embedded resources 
+	(.js, .css, images) are written to the page. The clean url re-writting 
+	option can be changed by setting the CleanResourceUrl property. 
+	Default="true".
+	
+	For example, the following url's demonstrate with url re-writting and 
+	without. 
+		
+	// CleanResourceUrl="true"
+	<script type="text/javascript" 
+	    src="/Coolite.Ext.Web.Testing/cool/extjs/ext-all/js/coolite.axd">
+	</script>
+	
+	// CleanResourceUrl="false"
+	<script type="text/javascript" src="/Coolite.Ext.Web.Testing/
+	    WebResource.axd?d=Ei4DLpf5Q4IAsNNjdlZgzE0LNteuoPg9VFzsfQvldaiiUan0
+	    pyLkVOdQCZJwzqhqk2jb9DpxtiCjTZc37D8PhplT5zXR2IsSZclUI7Y4cjo1&amp;t
+	    =633415722010295310">
+	</script>
+	
+
+**************************************************************************
+2008-02-27
+**************************************************************************
+
+1.  Added ColumnModel control.
+2.  Added TabPanel examples to Coolite.Ext.Web.Examples.
+3.  Changed all Int32 properties to just int values.
+	
+
+**************************************************************************
+2008-02-26
+**************************************************************************
+
+1.  Added XTypeAttribute which accepts a string for the Ext-specific type 
+	name.
+	
+2.  Added IsLazy property. If IsLazy the widgets will be added 
+	through lazy instantiation to the parent containers Items collection.
+	
+3.  Added JsonMode.Ignore. The property is ignored when rendering the 
+	client config.
+	
+
+**************************************************************************
+2008-02-25
+**************************************************************************
+
+1.  Added support for several new JsonMode options within the 
+	ClientConfigAttribute.
+	
+
+**************************************************************************
+2008-02-24
+**************************************************************************
+
+1.  Download Northwind and pubs Sample Databases 
+	See, http://tinyurl.com/3xo4zn
+	
+2.  Revised ResourceManager so it would work under Medium Trust.	
+
+
+**************************************************************************
+2008-02-22
+**************************************************************************
+
+1.  Added .Show() and .Close() methods to Window.
+2.  Fixed bug where Window would not postback contents if parent form was 
+	a control derived from HtmlForm.
+
+
+**************************************************************************
+2008-02-21
+**************************************************************************
+1.  Added support for image gzip compression, in addition to the existing 
+	.css and .js gzip compression. Provides over 70% reduction in total 
+	file size from non-gzipped files. All files are gzipped by default. 
+	
+    To turn off, set the gzip property in the Coolite configuration 
+    section within the Web.config.
+    
+2.  Cleaned up the ResourceManger.cs class.
+
+3.  Add Coolite.Utilities.dll to the Post-Build ILMerge event.
+
+4.  Added StrongNameKey to all projects.
+
+5.  Refreshed ExtJS and Datejs source files.
+
+6.  Added PostBack support to cool:Window.
+
+--------------------------------------------------------------------------
