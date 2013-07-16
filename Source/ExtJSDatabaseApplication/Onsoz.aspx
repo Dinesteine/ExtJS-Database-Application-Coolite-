@@ -37,7 +37,7 @@
             <hr />
             Uygulama hakkındaki her türlü düşünceniz için aşağıdaki bilgilerden bana ulaşabilirsiniz.<br />
             http://ismailkocacan.blogspot.com <br />
-            ismailkocacan@hotmail.com<br />
+            ismailkocacan@gmail.com<br />
             0541-869-07-78<br /><br />
        </span>
     </div>
